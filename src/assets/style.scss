@@ -1,0 +1,266 @@
+@import "./variables.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #C9D6FF; 
+  background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  
+  background: linear-gradient(to right, #E2E2E2, #C9D6FF); 
+}
+.navTab {
+  width: 650px;
+  margin: 20px auto 0;
+  box-sizing: border-box;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  background: $blue;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  &__item {
+    height: 45px;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $blue;
+    color: #fff;
+    &:hover {
+      cursor: default;
+    }
+    &-active{
+      background: #fff;
+      color: #000;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+    }
+  }
+}
+.form {
+  margin: 0 auto 10px;
+  width: 650px;
+  box-sizing: border-box;
+  border-radius: 25px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+  text-align: center;
+  background: #fff;
+  box-shadow: 3px 16px 10px 2px rgba(34, 60, 80, 0.2);
+   &-wrp {
+    border: none;
+    border-bottom: 1px solid #bdc3c7;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 0;
+    box-sizing: border-box;
+   }
+   &__btn {
+      margin: 20px auto;
+      background: $blue;
+      border: none;
+      outline: none;
+      width: 200px;
+      padding: 10px;
+      box-sizing: border-box;
+      color: #fff;
+      &:hover{
+        background: $hover;
+        cursor: pointer;
+      }
+      &:active{
+        background: $active;
+      }
+   }
+   &__item {
+    position: relative;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    &-submit {
+      width: 100%;
+      border-top: 1px solid $blue;
+      box-sizing: border-box;
+      margin: 10px auto 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      &-btns {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+      }
+    }
+    &-msg {
+      display: none;
+    }
+    &-error {
+      border: 1px solid $red !important;
+    }
+    &-err {
+      color: $red;
+      position: absolute;
+      top: 14px;
+      color: $red;
+      font-size: 12px;
+      display: block;
+    }
+    &-title {
+      position: relative;
+      margin: 0;
+      font-weight: bold;
+      cursor: default;
+      &:last-of-type{
+        margin-top: 10px;
+      }
+    }
+    &-req {
+      color: $red;
+      position: absolute;
+      left: -10px;
+      &:last-of-type {
+        position: static;
+      }
+    }
+    &-box {
+      width: 250px;
+      margin-left: 15px;
+      display: flex;
+      justify-content: space-around;
+      label {
+        display: flex;
+        align-items: center;
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }
+    &-r {
+      position: relative;
+      &:after {
+        display: block;
+        content: "\203A";
+        font-weight: bold;
+        position: absolute;
+        transform: rotate(90deg);
+        right: 8px;
+        font-size: 18px;
+      }
+    }
+    &-multi {
+      cursor: pointer;
+      &-open {
+        border: 1px solid $hover;
+        border-top: none;
+        width: 250px;
+        box-sizing: border-box;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        top: 25px;
+        display: none;
+        z-index: 10;
+        background: #fff;
+        &-active {
+          display: flex;
+        }
+        label {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          box-sizing: border-box;
+          border-bottom: 1px solid rgba(0, 0, 0, .5);
+          &:last-child {
+            border-bottom: none;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+          input[type=checkbox] {
+            margin: 0 15px;
+          }
+        }
+      }
+    }
+    input, select {
+      width: 250px;
+      height: 25px;
+      box-sizing: border-box;
+      padding: 5px;
+      margin-left: 15px;
+      outline: none;
+      &:focus {
+        box-sizing: border-box;
+        border: 1px solid $blue;
+        box-shadow: 0px 5px 16px 3px rgba(106, 137, 204, 0.2);
+      }
+    }
+    select {
+      padding: 0;
+      // height: auto;
+      // !!!!!!!!!!!!!!!!!
+    }
+    input[type=radio], input[type=checkbox]{
+      width: 20px;
+      &:focus {
+        border: none;
+        box-shadow: none;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    input[type=checkbox] {
+      margin-right: 230px;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+// .form__item-multi-open {
+//   border: 1px solid $hover;
+//   border-top: none;
+//   width: 250px;
+//   box-sizing: border-box;
+//   position: absolute;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   top: 27px;
+//   display: none;
+//   z-index: 10;
+//   background: #fff;
+//   &-active {
+//     display: flex;
+//   }
+//   label {
+//     width: 100%;
+//     display: flex;
+//     align-items: center;
+//     box-sizing: border-box;
+//     border-bottom: 1px solid rgba(0, 0, 0, .5);
+//     &:last-child {
+//       border-bottom: none;
+//     }
+//     &:hover {
+//       cursor: pointer;
+//     }
+//     input[type=checkbox] {
+//       margin: 0 15px;
+//     }
+//   }
+// }
