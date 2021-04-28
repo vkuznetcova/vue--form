@@ -5,9 +5,7 @@
       <div class="navTab__item" :class="{ 'navTab__item-active': navTab===1}">Адрес</div>
       <div class="navTab__item" :class="{ 'navTab__item-active': navTab===2}">Паспорт</div>
     </nav>
-    <form action="#" 
-    
-    class="form">
+    <form action="#" class="form">
       <fieldset class="form-wrp" v-if="navTab === 0">
         <label class="form__item">
           <p class="form__item-title">
@@ -46,7 +44,7 @@
           Номер телефона:</p>
           <input type="number" v-model.number="$v.user.info.phone.$model" :class="{ 'form__item-error': $v.user.info.phone.$error }">
         </label>
-        <div class="form__item">
+        <div class="form__item form__item-mini">
           <p class="form__item-title">Пол:</p>
           <div class="form__item-box">
             <label>Мужской<input name="sex" type="radio" value="male" v-model.trim="user.sex" ></label>
@@ -75,7 +73,7 @@
             <option>Чернышева</option>
           </select>
         </label>
-        <label class="form__item">
+        <label class="form__item form__item-mini">
           <p class="form__item-title">Не отправлять СМС</p>
           <input type="checkbox" v-model.trim="user.info.sms" >
         </label>
@@ -87,7 +85,6 @@
           <button class="form__btn" type="button" @click="onSubmitNext()">Дальше</button>
         </div>
       </fieldset>
-
       <fieldset class="form-wrp" v-if="navTab === 1">
         <label class="form__item">
           <p class="form__item-title">Индекс:</p>
@@ -127,7 +124,6 @@
           </div>
         </div>
       </fieldset>
-
       <fieldset class="form-wrp" v-if="navTab === 2">
         <label class="form__item">
           <p class="form__item-title">
@@ -172,22 +168,23 @@
             </p>
             <div class="form__item-submit-btns">
               <button class="form__btn" @click="navTab--">Назад</button>
-              <button class="form__btn" @click="submit()">Принять</button>
+              <button class="form__btn" @click="onSubmitNext()">Принять</button>
             </div>
           </div>
       </fieldset> 
-
     </form>
-
-    
-
-    
+    <div class="form-complite" v-if="submitStatus === true">
+      <div class="form-complite__wrp">
+        <span class="form-complite__cross" @click="submitStatus = false"></span>
+        <p class="form-complite__txt">Клиент успешно создан!</p>
+        <button class="form__btn" @click="submitStatus = false">Принять</button>
+      </div>
+    </div>
   </div>
 </template>
 
 
 <script>
-// @submit.prevent="submit" 
 import { required, minLength, numeric, helpers} from 'vuelidate/lib/validators';
 
 const phonReg = helpers.regex('phone', /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.0-9]*$/g);
@@ -290,48 +287,51 @@ export default {
     openSelect() {
       document.querySelector('.form__item-multi-open').classList.toggle('form__item-multi-open-active');
     },
-    submit() {
-      console.log('submit!');
-      this.$v.$touch();
-      if (this.$v.$invalid) {
-        window.scrollTo(0, 0);
-      } else {
-        this.submitStatus = true;
-        alert('complite!');
-        this.resetForm();
-        this.navTab = 0;
-      } 
-    },
     onSubmitNext() {
-      console.log("submit");
-      this.$v.$touch();
       switch(this.navTab) {
         case 0:
           if (this.$v.user.info.$invalid) {
+            this.$v.user.info.$touch();
             window.scrollTo(0, 0);
           } else {
-            console.log('page1');
             this.navTab++;
           }
           break;
         case 1:
           if (this.$v.user.address.$invalid) {
+            this.$v.user.address.$touch();
             window.scrollTo(0, 0);
           } else {
-            console.log('page2');
             this.navTab++;
           }
+          break;
+        case 2:
+          this.$v.user.passport.$touch();
+          if (this.$v.$invalid) {
+            window.scrollTo(0, 0);
+          } else {
+            this.submitStatus = true;
+            this.resetForm();
+            this.$v.$reset();
+            this.navTab = 0;
+          } 
           break;
          default: 
       }
     },
     resetForm() {
-        console.log('Reseting the form');
         let self = this; 
-        Object.keys(this.user).forEach(item => {
-          self.user[item] = '';
+        Object.keys(this.user.info).forEach(item => {
+          self.user.info[item] = '';
         });
-      },
-  }
+        Object.keys(this.user.address).forEach(item => {
+          self.user.address[item] = '';
+        });
+        Object.keys(this.user.passport).forEach(item => {
+          self.user.passport[item] = '';
+        });
+    },
+  },
+  
 }
 </script>

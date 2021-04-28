@@ -1,0 +1,104 @@
+@media  (max-width: 767px) {
+  #app {
+    padding: 10px;
+  }
+  .navTab {
+    width: 100%;
+  }
+  .form {
+    width: 100%;
+    &__item-box {
+      width: 42%;
+    }
+    &__item {
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      &-r::after {
+        right: 25%;
+        top: 50%;
+      }
+      &-multi-open {
+        width: 50%;
+        top: 58px;
+      }
+      &-mini {
+        flex-wrap: nowrap;
+        p {
+          width: auto;
+        }
+      }
+      &-title {
+        width: 50%;
+        text-align: left;
+        margin-bottom: 10px;
+      }
+      input, select {
+        width: 51%;
+        height: 30px;
+        margin: 0;
+      }
+      input[type=checkbox] {
+        margin-right: 140px;
+        margin-left: 15px;
+      }
+      input[type=radio] {
+        margin-left: 15px !important;
+      }
+      &-msg {
+        top: 48px;
+      }
+      &-submit {
+        p {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 480px) {
+  .form {
+    &__item{
+      &-r::after {
+        right: 7%;
+      }
+      &-title {
+        width: 100%;
+      }
+      &-box {
+        width: 80%;
+      }
+      &-multi-open {
+        width: 86%;
+        top: 58px;
+      }
+      input, select {
+        width: 90%;
+      }
+      &-mini {
+        justify-content: start;
+        input {
+          margin: 0 !important;
+        }
+        p {
+          margin-right: 10px;
+        }
+      }
+      &-submit {
+        &-btns {
+          flex-wrap: wrap;
+        }
+      } 
+    }
+    &-complite__wrp {
+      width: 90%;
+    }
+  }
+
+  
+  
+  
+}
